@@ -24,3 +24,69 @@ vector<vector<int>> sum3(vector<int> arr){
 }
 
 // *************************Optimal*********************************
+
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        int n = nums.size();
+        set<vector<int>> sv;
+
+        // a + b + c = 0
+        // b + c = -a = target
+        // c = target - b
+
+        for(int i = 0; i < n; i++) {
+            set<int> s;
+            int a = nums[i];
+            int target = -a;
+            for(int j = i + 1; j < n; j++) {
+                int b = nums[j];
+                int c = target - b;
+                if(s.find(c) != s.end()) {
+                    vector<int> trip = {a , b, c};
+                    sort(trip.begin(), trip.end());
+                    sv.insert(trip);
+                }
+
+                s.insert(b);
+            }
+        }
+
+        vector<vector<int>> ans(sv.begin(), sv.end());
+
+        return ans;
+    }
+};
+
+// *****************Optimized Approach ( Two Pointer Approach )**********************
+
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        
+        int n = nums.size();
+        vector<vector<int>> ans;
+
+        sort(nums.begin(), nums.end());
+        for(int i = 0; i < n; i++) {
+            if(i > 0 && nums[i] == nums[i - 1]) continue; // if the previous value at i is same as current , to handle that
+
+            int j = i + 1, k = n - 1;
+            while(j < k) {
+                int sum = nums[i] + nums[j] + nums[k];
+                if(sum > 0) {
+                    k--;
+                } else if(sum < 0) {
+                    j++;
+                } else { // sum == 0 || Store the triplet
+                    ans.push_back({nums[i], nums[j], nums[k]});
+                    j++; k--;
+                    
+                    while(j < k && nums[j] == nums[j - 1]) j++; // if the previous and current value at j is same , to handle that
+                }
+
+            }
+        }
+        return ans;
+    }
+};
