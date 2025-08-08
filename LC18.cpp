@@ -1,0 +1,77 @@
+// ****************************************************************************************
+
+class Solution { // TC : O( nlog(n) + n3)
+public:
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+        int n = nums.size();
+        sort(nums.begin() , nums.end());
+        vector<vector<int>> ans;
+
+        for(int i = 0; i < n; i++) {
+            if(i > 0 && nums[i - 1] == nums[i]) continue; // value at i is as same as at i - 1 , then we will get repeated groups
+            for(int j = i + 1; j < n;) {
+                int p = j + 1, q = n - 1;
+
+                while(p < q) {
+                    long long sum = (long long)nums[i] + (long long)nums[j] + (long long)nums[p] + (long long)nums[q];
+                    if(sum < target) {
+                        p++;
+                    } else if(sum > target) {
+                        q--;
+                    } else {
+                        ans.push_back({nums[i] , nums[j] , nums[p] , nums[q]});
+                        p++; q--;
+
+                        while(p < q && nums[p] == nums[p - 1]) p++; // value at p is as same as at p - 1 , then we will get repeated groups
+                    }
+
+                }
+                j++;
+                while(j < n && nums[j - 1] == nums[j]) j++; // value at j is as same as at j - 1 , then we will get repeated groups
+            }
+        }
+
+        return ans;
+    }
+};
+
+// **************************************CHAT GPT**************************************************
+
+class Solution {
+public:
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+        int n = nums.size();
+        sort(nums.begin(), nums.end());
+        vector<vector<int>> ans;
+
+        for (int i = 0; i < n; i++) {
+            if (i > 0 && nums[i] == nums[i - 1]) continue;
+
+            for (int j = i + 1; j < n; j++) {
+                if (j > i + 1 && nums[j] == nums[j - 1]) continue;
+
+                int p = j + 1;
+                int q = n - 1;
+
+                while (p < q) {
+                    long long sum = (long long)nums[i] + (long long)nums[j] + (long long)nums[p] + (long long)nums[q];
+
+                    if (sum < target) {
+                        p++;
+                    } 
+                    else if (sum > target) {
+                        q--;
+                    } 
+                    else {
+                        ans.push_back({nums[i], nums[j], nums[p], nums[q]});
+                        p++;
+                        q--;
+                        while (p < q && nums[p] == nums[p - 1]) p++;
+                        while (p < q && nums[q] == nums[q + 1]) q--;
+                    }
+                }
+            }
+        }
+        return ans;
+    }
+};
