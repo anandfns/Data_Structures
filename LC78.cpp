@@ -1,25 +1,22 @@
 class Solution {
 public:
-    // Helper Function 
-    void getAllSubsets(vector<int> &nums, vector<int>& ans, vector<vector<int>> & allSubsets, int i) {
-        if(i == nums.size()) { // Base case , when we reach at the end of the recursion tree then i == nums.size()
-            subs.push_back(ans);
+    void func(vector<int>& nums, int idx, vector<int>& temp, vector<vector<int>>& ans) {
+        if(idx >= nums.size()) {
+            ans.push_back(temp);
             return;
         }
 
-        // include
-        ans.push_back(nums[i]);
-        getAllSubsets(nums, ans, allSubsets, i+1);
+        temp.push_back(nums[idx]);
+        func(nums, idx+1, temp, ans);
 
-        ans.pop_back(); // during backtracking it removes the elemet
-        // exclude
-        getAllSubsets(nums, ans, allSubsets, i+1);
+        temp.pop_back(); // works during backtracking
+        func(nums, idx+1, temp, ans);
     }
-    
+
     vector<vector<int>> subsets(vector<int>& nums) {
-        vector<int> ans;
-        vector<vector<int>> allSubsets;
-        getAllSubsets(nums, ans, allSubsets, 0);
-        return subs;
+        vector<vector<int>> ans;
+        vector<int> temp;
+        func(nums, 0, temp, ans); // 0 is the initial idx of nums
+        return ans;
     }
 };
