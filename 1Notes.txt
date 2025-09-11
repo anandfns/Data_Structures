@@ -5,4 +5,3 @@ hello
 1838 - To
 
 Sliding Window after hashing
-hashing
