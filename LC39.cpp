@@ -12,7 +12,7 @@ public:
             return;
         }
 
-        if(can[idx] <= tar) {
+        if(can[idx] <= tar) { // or if(tar > 0) 
             temp.push_back(can[idx]);
             func(can, tar - can[idx], ans, temp, idx);
             temp.pop_back();
