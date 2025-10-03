@@ -2,7 +2,8 @@ LC 191 - have to solve
 LC 326 | 231 | 
 342 - power of 4 ~ have to solve
 hello
-1838 - To
+1838
 
 Sliding Window after hashing
 LC 2197 - lcm - hard
+
