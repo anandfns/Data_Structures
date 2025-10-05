@@ -17,6 +17,7 @@ public:
     }
 
     int smallestDivisor(vector<int>& nums, int t) {
+        if(nums.size() > t) return -1;
         int low = 1;
         int high = maxElem(nums);
         // int ans = high;
