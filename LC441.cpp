@@ -15,6 +15,21 @@ public:
     }
 };
 
+// TC : O(rootN)
+class Solution {
+public:
+    int arrangeCoins(int n) {
+        int i = 1;
+        int cnt = 0;
+        while(n-i >= 0) {
+            cnt++;
+            n = n-i;
+            i++;
+        }
+        return cnt;
+    }
+};
+
 // Binary Search ~ TC : O(logN) and SC : O(1)
 class Solution {
 public:
